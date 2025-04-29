@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package swiftconsensus;
+
+// Heartbeat + Score Message
+message HeartbeatRequest {
+  string server_id = 1;
+  int64 timestamp = 2;
+  double cpu_free_percent = 3;
+  double memory_free_percent = 4;
+  int32 task_queue_length = 5;
+  double calculated_score = 6;
+}
+
+// Simple Acknowledgement
+message HeartbeatResponse {
+  string message = 1;
+}
+
+// New task message
+message TaskAssignmentRequest {
+  string task_id = 1;
+  string assigned_by = 2;
+  string task_data = 3;
+}
+
+// Simple acknowledgment
+message TaskAssignmentResponse {
+  string message = 1;
+}
+
+// Define gRPC Service
+service SwiftConsensusService {
+  rpc SendHeartbeat(HeartbeatRequest) returns (HeartbeatResponse);
+  rpc AssignTask(TaskAssignmentRequest) returns (TaskAssignmentResponse);
+}

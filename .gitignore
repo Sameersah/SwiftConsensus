@@ -1,0 +1,9 @@
+/build/
+*.o
+*.out
+*.log
+*.DS_Store
+
+# Ignore generated unless you want to commit them
+/generated/*
+!generated/*.pb.*

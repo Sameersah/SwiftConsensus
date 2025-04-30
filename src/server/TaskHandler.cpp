@@ -1,6 +1,7 @@
 #include "TaskHandler.h"
 #include "client/SwiftConsensusClient.h"
 #include <iostream>
+#include <limits>
 
 void TaskHandler::generateAndAssignTask() {
     std::string new_task_id = "task_" + std::to_string(taskCounter_++);
@@ -8,17 +9,26 @@ void TaskHandler::generateAndAssignTask() {
 
     auto peers = peerTable_.getAllPeers();
     std::string best_worker = "";
-    double best_score = -1.0;
+    double best_score = std::numeric_limits<double>::lowest();
+    double penalty = 10.0;  // Penalize self to reduce bias
 
     for (const auto& [server_id, info] : peers) {
-        if (info.is_alive && server_id != selfId_ && info.score > best_score) {
+        if (!info.is_alive) continue;
+
+        double effective_score = info.score;
+        if (server_id == selfId_) {
+            effective_score -= penalty;  // Apply penalty for self
+        }
+
+        if (effective_score > best_score) {
             best_worker = server_id;
-            best_score = info.score;
+            best_score = effective_score;
         }
     }
 
     if (!best_worker.empty()) {
-        std::cout << "[Leader Assigns Task] " << new_task_id << " to " << best_worker << std::endl;
+        std::cout << "[Leader Assigns Task] " << new_task_id << " to " << best_worker
+                  << " (effective score: " << best_score << ")" << std::endl;
 
         for (auto& client : clients_) {
             if (client->GetServerAddress() == "localhost:" + best_worker.substr(7)) {

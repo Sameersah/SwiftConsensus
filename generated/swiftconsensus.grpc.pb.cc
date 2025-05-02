@@ -22,8 +22,10 @@
 namespace swiftconsensus {
 
 static const char* SwiftConsensusService_method_names[] = {
+  "/swiftconsensus.SwiftConsensusService/SubmitTask",
   "/swiftconsensus.SwiftConsensusService/SendHeartbeat",
   "/swiftconsensus.SwiftConsensusService/AssignTask",
+  "/swiftconsensus.SwiftConsensusService/GetLeader",
 };
 
 std::unique_ptr< SwiftConsensusService::Stub> SwiftConsensusService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -33,9 +35,34 @@ std::unique_ptr< SwiftConsensusService::Stub> SwiftConsensusService::NewStub(con
 }
 
 SwiftConsensusService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
-  : channel_(channel), rpcmethod_SendHeartbeat_(SwiftConsensusService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_AssignTask_(SwiftConsensusService_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  : channel_(channel), rpcmethod_SubmitTask_(SwiftConsensusService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_SendHeartbeat_(SwiftConsensusService_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_AssignTask_(SwiftConsensusService_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetLeader_(SwiftConsensusService_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
+
+::grpc::Status SwiftConsensusService::Stub::SubmitTask(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest& request, ::swiftconsensus::SubmitTaskResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::swiftconsensus::SubmitTaskRequest, ::swiftconsensus::SubmitTaskResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_SubmitTask_, context, request, response);
+}
+
+void SwiftConsensusService::Stub::async::SubmitTask(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest* request, ::swiftconsensus::SubmitTaskResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::swiftconsensus::SubmitTaskRequest, ::swiftconsensus::SubmitTaskResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_SubmitTask_, context, request, response, std::move(f));
+}
+
+void SwiftConsensusService::Stub::async::SubmitTask(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest* request, ::swiftconsensus::SubmitTaskResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_SubmitTask_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::swiftconsensus::SubmitTaskResponse>* SwiftConsensusService::Stub::PrepareAsyncSubmitTaskRaw(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::swiftconsensus::SubmitTaskResponse, ::swiftconsensus::SubmitTaskRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_SubmitTask_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::swiftconsensus::SubmitTaskResponse>* SwiftConsensusService::Stub::AsyncSubmitTaskRaw(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncSubmitTaskRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
 
 ::grpc::Status SwiftConsensusService::Stub::SendHeartbeat(::grpc::ClientContext* context, const ::swiftconsensus::HeartbeatRequest& request, ::swiftconsensus::HeartbeatResponse* response) {
   return ::grpc::internal::BlockingUnaryCall< ::swiftconsensus::HeartbeatRequest, ::swiftconsensus::HeartbeatResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_SendHeartbeat_, context, request, response);
@@ -83,9 +110,42 @@ void SwiftConsensusService::Stub::async::AssignTask(::grpc::ClientContext* conte
   return result;
 }
 
+::grpc::Status SwiftConsensusService::Stub::GetLeader(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest& request, ::swiftconsensus::GetLeaderResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::swiftconsensus::GetLeaderRequest, ::swiftconsensus::GetLeaderResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetLeader_, context, request, response);
+}
+
+void SwiftConsensusService::Stub::async::GetLeader(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest* request, ::swiftconsensus::GetLeaderResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::swiftconsensus::GetLeaderRequest, ::swiftconsensus::GetLeaderResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetLeader_, context, request, response, std::move(f));
+}
+
+void SwiftConsensusService::Stub::async::GetLeader(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest* request, ::swiftconsensus::GetLeaderResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetLeader_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::swiftconsensus::GetLeaderResponse>* SwiftConsensusService::Stub::PrepareAsyncGetLeaderRaw(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::swiftconsensus::GetLeaderResponse, ::swiftconsensus::GetLeaderRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetLeader_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::swiftconsensus::GetLeaderResponse>* SwiftConsensusService::Stub::AsyncGetLeaderRaw(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncGetLeaderRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 SwiftConsensusService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       SwiftConsensusService_method_names[0],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< SwiftConsensusService::Service, ::swiftconsensus::SubmitTaskRequest, ::swiftconsensus::SubmitTaskResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](SwiftConsensusService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::swiftconsensus::SubmitTaskRequest* req,
+             ::swiftconsensus::SubmitTaskResponse* resp) {
+               return service->SubmitTask(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      SwiftConsensusService_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< SwiftConsensusService::Service, ::swiftconsensus::HeartbeatRequest, ::swiftconsensus::HeartbeatResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](SwiftConsensusService::Service* service,
@@ -95,7 +155,7 @@ SwiftConsensusService::Service::Service() {
                return service->SendHeartbeat(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      SwiftConsensusService_method_names[1],
+      SwiftConsensusService_method_names[2],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< SwiftConsensusService::Service, ::swiftconsensus::TaskAssignmentRequest, ::swiftconsensus::TaskAssignmentResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](SwiftConsensusService::Service* service,
@@ -104,9 +164,26 @@ SwiftConsensusService::Service::Service() {
              ::swiftconsensus::TaskAssignmentResponse* resp) {
                return service->AssignTask(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      SwiftConsensusService_method_names[3],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< SwiftConsensusService::Service, ::swiftconsensus::GetLeaderRequest, ::swiftconsensus::GetLeaderResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](SwiftConsensusService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::swiftconsensus::GetLeaderRequest* req,
+             ::swiftconsensus::GetLeaderResponse* resp) {
+               return service->GetLeader(ctx, req, resp);
+             }, this)));
 }
 
 SwiftConsensusService::Service::~Service() {
+}
+
+::grpc::Status SwiftConsensusService::Service::SubmitTask(::grpc::ServerContext* context, const ::swiftconsensus::SubmitTaskRequest* request, ::swiftconsensus::SubmitTaskResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
 ::grpc::Status SwiftConsensusService::Service::SendHeartbeat(::grpc::ServerContext* context, const ::swiftconsensus::HeartbeatRequest* request, ::swiftconsensus::HeartbeatResponse* response) {
@@ -117,6 +194,13 @@ SwiftConsensusService::Service::~Service() {
 }
 
 ::grpc::Status SwiftConsensusService::Service::AssignTask(::grpc::ServerContext* context, const ::swiftconsensus::TaskAssignmentRequest* request, ::swiftconsensus::TaskAssignmentResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status SwiftConsensusService::Service::GetLeader(::grpc::ServerContext* context, const ::swiftconsensus::GetLeaderRequest* request, ::swiftconsensus::GetLeaderResponse* response) {
   (void) context;
   (void) request;
   (void) response;

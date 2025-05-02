@@ -26,3 +26,17 @@ target_link_libraries(SwiftConsensusServer
         gRPC::grpc++
         protobuf::libprotobuf
 )
+
+add_executable(TaskSubmitterClient
+        src/client/TaskSubmitterClient.cpp
+        generated/swiftconsensus.pb.cc
+        generated/swiftconsensus.grpc.pb.cc
+)
+
+target_link_libraries(TaskSubmitterClient
+        gRPC::grpc++
+        protobuf::libprotobuf
+)
+
+include_directories(src/common/)
+

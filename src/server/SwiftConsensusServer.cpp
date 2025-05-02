@@ -7,15 +7,17 @@
 #include <unordered_map>
 #include <mutex>
 #include <cstdlib>
+#include <limits>
+#include <atomic>
 
 #include <grpcpp/grpcpp.h>
 #include "swiftconsensus.grpc.pb.h"
 
 #include "common/PeerTable.h"
-#include "client/SwiftConsensusClient.h"  // <-- full include here
+#include "client/SwiftConsensusClient.h"
 #include "server/LeaderElectionManager.h"
 #include "server/FailureDetector.h"
-#include "server/TaskHandler.h"
+#include "common/SystemMetrics.h"
 
 
 using grpc::Server;
@@ -24,24 +26,34 @@ using grpc::ServerContext;
 using grpc::Status;
 using grpc::Channel;
 using grpc::ClientContext;
+
 using swiftconsensus::HeartbeatRequest;
 using swiftconsensus::HeartbeatResponse;
-using swiftconsensus::SwiftConsensusService;
 using swiftconsensus::TaskAssignmentRequest;
 using swiftconsensus::TaskAssignmentResponse;
+using swiftconsensus::SubmitTaskRequest;
+using swiftconsensus::SubmitTaskResponse;
+using swiftconsensus::GetLeaderRequest;
+using swiftconsensus::GetLeaderResponse;
+using swiftconsensus::SwiftConsensusService;
 
 // --- Global Variables ---
 std::string self_id;
 std::string self_address;
+std::atomic<int> current_queue_length{0};  // Real task queue counter
 
 // --- gRPC Server Side Implementation ---
-class SwiftConsensusServiceImpl final : public swiftconsensus::SwiftConsensusService::Service {
+class SwiftConsensusServiceImpl final : public SwiftConsensusService::Service {
 public:
-    SwiftConsensusServiceImpl(PeerTable& peerTable)
-        : peerTable_(peerTable) {}
+    SwiftConsensusServiceImpl(PeerTable& peerTable,
+                              LeaderElectionManager& electionManager,
+                              std::vector<std::shared_ptr<SwiftConsensusClient>>& clients)
+        : peerTable_(peerTable),
+          electionManager_(electionManager),
+          clients_(clients) {}
 
     Status SendHeartbeat(ServerContext* context, const HeartbeatRequest* request,
-                          HeartbeatResponse* reply) override {
+                         HeartbeatResponse* reply) override {
         peerTable_.updatePeer(request->server_id(), request->calculated_score());
         std::cout << "[Heartbeat Received] " << request->server_id()
                   << " | Score: " << request->calculated_score()
@@ -60,21 +72,85 @@ public:
                   << " Assigned By: " << request->assigned_by()
                   << " | Task Data: " << request->task_data() << std::endl;
 
-        // Simulate task processing
-        std::this_thread::sleep_for(std::chrono::seconds(2));
+        current_queue_length++;  // track real load
+
+        std::this_thread::sleep_for(std::chrono::seconds(2));  // simulate work
+
         std::cout << "[Task Completed] TaskID: " << request->task_id() << std::endl;
+        current_queue_length--;
 
         reply->set_message("Task processed successfully");
         return Status::OK;
     }
 
+    Status SubmitTask(ServerContext* context, const SubmitTaskRequest* request,
+                      SubmitTaskResponse* reply) override {
+        if (electionManager_.getCurrentLeader() != self_id) {
+            reply->set_status("❌ Not the leader");
+            return Status::OK;
+        }
+
+        auto peers = peerTable_.getAllPeers();
+        std::string best_worker = "";
+        double best_score = std::numeric_limits<double>::lowest();
+        double penalty = 10.0;
+
+        for (const auto& [server_id, info] : peers) {
+            if (!info.is_alive) continue;
+
+            double effective_score = info.score;
+            if (server_id == self_id) {
+                effective_score -= penalty;
+            }
+
+            if (effective_score > best_score) {
+                best_score = effective_score;
+                best_worker = server_id;
+            }
+        }
+
+        if (best_worker.empty()) {
+            reply->set_status("❌ No alive workers");
+            return Status::OK;
+        }
+
+        std::string task_id = request->task_id();
+        std::string task_data = request->task_data();
+
+        std::cout << "[Leader Routing Task] " << task_id << " → " << best_worker
+                  << " (effective score: " << best_score << ")" << std::endl;
+
+        for (auto& client : clients_) {
+            if (client->GetServerAddress() == "localhost:" + best_worker.substr(7)) {
+                client->AssignTask(task_id, self_id, task_data);
+                break;
+            }
+        }
+
+        reply->set_status("✅ Task assigned to best peer");
+        return Status::OK;
+    }
+
+    Status GetLeader(ServerContext* context, const GetLeaderRequest* request,
+                     GetLeaderResponse* reply) override {
+        std::string leader = electionManager_.getCurrentLeader();
+        reply->set_leader_id(leader);
+        std::cout << "[GetLeader] Responding with current leader: " << leader << std::endl;
+        return Status::OK;
+    }
+
 private:
     PeerTable& peerTable_;
+    LeaderElectionManager& electionManager_;
+    std::vector<std::shared_ptr<SwiftConsensusClient>>& clients_;
 };
 
 // --- Function to Run gRPC Server ---
-void RunServer(std::string server_address, PeerTable& peerTable) {
-    SwiftConsensusServiceImpl service(peerTable);
+void RunServer(std::string server_address,
+               PeerTable& peerTable,
+               LeaderElectionManager& electionManager,
+               std::vector<std::shared_ptr<SwiftConsensusClient>>& clients) {
+    SwiftConsensusServiceImpl service(peerTable, electionManager, clients);
 
     ServerBuilder builder;
     builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
@@ -103,9 +179,8 @@ int main(int argc, char** argv) {
 
     std::vector<std::shared_ptr<SwiftConsensusClient>> clients;
 
-    // Hardcoded peer addresses for demo
     std::vector<std::string> peer_addresses = {
-        "localhost:50051",
+        "localhost:50056",
         "localhost:50052",
         "localhost:50053",
         "localhost:50054",
@@ -119,12 +194,9 @@ int main(int argc, char** argv) {
         }
     }
 
-    TaskHandler taskHandler(self_id, peerTable, clients);
+    std::thread server_thread(RunServer, self_address,
+                              std::ref(peerTable), std::ref(electionManager), std::ref(clients));
 
-    // Start gRPC Server in a separate thread
-    std::thread server_thread(RunServer, self_address, std::ref(peerTable));
-
-    // Start Failure Detection and Leader Election loops
     std::thread failure_thread([&]() {
         while (true) {
             failureDetector.detectFailures();
@@ -135,28 +207,23 @@ int main(int argc, char** argv) {
     std::thread leader_thread([&]() {
         while (true) {
             electionManager.runElection();
-            std::this_thread::sleep_for(std::chrono::seconds(5));
+            std::this_thread::sleep_for(std::chrono::seconds(15));
         }
     });
 
-    // Main loop: Heartbeats + Task Generation
     while (true) {
-        double cpu_free = rand() % 100;      // Simulated metrics
-        double memory_free = rand() % 100;
-        int queue_size = rand() % 10;
-        double score = 0.4 * cpu_free + 0.3 * memory_free - 0.2 * queue_size;
+        double cpu_free = getCPUUsage();
+        double memory_free = getFreeMemoryPercent();
+        int queue_size = current_queue_length.load();
 
+        double score = 0.4 * cpu_free + 0.3 * memory_free - 0.2 * queue_size;
         peerTable.updateSelf(self_id, score);
 
         for (auto& client : clients) {
             client->SendHeartbeat(self_id, cpu_free, memory_free, queue_size, score);
         }
 
-        if (electionManager.getCurrentLeader() == self_id) {
-            taskHandler.generateAndAssignTask();
-        }
-
-        std::this_thread::sleep_for(std::chrono::seconds(2));
+        std::this_thread::sleep_for(std::chrono::seconds(5));
     }
 
     server_thread.join();

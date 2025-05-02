@@ -37,6 +37,13 @@ class SwiftConsensusService final {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
+    virtual ::grpc::Status SubmitTask(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest& request, ::swiftconsensus::SubmitTaskResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::SubmitTaskResponse>> AsyncSubmitTask(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::SubmitTaskResponse>>(AsyncSubmitTaskRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::SubmitTaskResponse>> PrepareAsyncSubmitTask(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::SubmitTaskResponse>>(PrepareAsyncSubmitTaskRaw(context, request, cq));
+    }
     virtual ::grpc::Status SendHeartbeat(::grpc::ClientContext* context, const ::swiftconsensus::HeartbeatRequest& request, ::swiftconsensus::HeartbeatResponse* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::HeartbeatResponse>> AsyncSendHeartbeat(::grpc::ClientContext* context, const ::swiftconsensus::HeartbeatRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::HeartbeatResponse>>(AsyncSendHeartbeatRaw(context, request, cq));
@@ -51,26 +58,48 @@ class SwiftConsensusService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::TaskAssignmentResponse>> PrepareAsyncAssignTask(::grpc::ClientContext* context, const ::swiftconsensus::TaskAssignmentRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::TaskAssignmentResponse>>(PrepareAsyncAssignTaskRaw(context, request, cq));
     }
+    virtual ::grpc::Status GetLeader(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest& request, ::swiftconsensus::GetLeaderResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::GetLeaderResponse>> AsyncGetLeader(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::GetLeaderResponse>>(AsyncGetLeaderRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::GetLeaderResponse>> PrepareAsyncGetLeader(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::GetLeaderResponse>>(PrepareAsyncGetLeaderRaw(context, request, cq));
+    }
     class async_interface {
      public:
       virtual ~async_interface() {}
+      virtual void SubmitTask(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest* request, ::swiftconsensus::SubmitTaskResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void SubmitTask(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest* request, ::swiftconsensus::SubmitTaskResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       virtual void SendHeartbeat(::grpc::ClientContext* context, const ::swiftconsensus::HeartbeatRequest* request, ::swiftconsensus::HeartbeatResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void SendHeartbeat(::grpc::ClientContext* context, const ::swiftconsensus::HeartbeatRequest* request, ::swiftconsensus::HeartbeatResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       virtual void AssignTask(::grpc::ClientContext* context, const ::swiftconsensus::TaskAssignmentRequest* request, ::swiftconsensus::TaskAssignmentResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void AssignTask(::grpc::ClientContext* context, const ::swiftconsensus::TaskAssignmentRequest* request, ::swiftconsensus::TaskAssignmentResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void GetLeader(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest* request, ::swiftconsensus::GetLeaderResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void GetLeader(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest* request, ::swiftconsensus::GetLeaderResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::SubmitTaskResponse>* AsyncSubmitTaskRaw(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::SubmitTaskResponse>* PrepareAsyncSubmitTaskRaw(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::HeartbeatResponse>* AsyncSendHeartbeatRaw(::grpc::ClientContext* context, const ::swiftconsensus::HeartbeatRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::HeartbeatResponse>* PrepareAsyncSendHeartbeatRaw(::grpc::ClientContext* context, const ::swiftconsensus::HeartbeatRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::TaskAssignmentResponse>* AsyncAssignTaskRaw(::grpc::ClientContext* context, const ::swiftconsensus::TaskAssignmentRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::TaskAssignmentResponse>* PrepareAsyncAssignTaskRaw(::grpc::ClientContext* context, const ::swiftconsensus::TaskAssignmentRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::GetLeaderResponse>* AsyncGetLeaderRaw(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::swiftconsensus::GetLeaderResponse>* PrepareAsyncGetLeaderRaw(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+    ::grpc::Status SubmitTask(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest& request, ::swiftconsensus::SubmitTaskResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::swiftconsensus::SubmitTaskResponse>> AsyncSubmitTask(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::swiftconsensus::SubmitTaskResponse>>(AsyncSubmitTaskRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::swiftconsensus::SubmitTaskResponse>> PrepareAsyncSubmitTask(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::swiftconsensus::SubmitTaskResponse>>(PrepareAsyncSubmitTaskRaw(context, request, cq));
+    }
     ::grpc::Status SendHeartbeat(::grpc::ClientContext* context, const ::swiftconsensus::HeartbeatRequest& request, ::swiftconsensus::HeartbeatResponse* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::swiftconsensus::HeartbeatResponse>> AsyncSendHeartbeat(::grpc::ClientContext* context, const ::swiftconsensus::HeartbeatRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::swiftconsensus::HeartbeatResponse>>(AsyncSendHeartbeatRaw(context, request, cq));
@@ -85,13 +114,24 @@ class SwiftConsensusService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::swiftconsensus::TaskAssignmentResponse>> PrepareAsyncAssignTask(::grpc::ClientContext* context, const ::swiftconsensus::TaskAssignmentRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::swiftconsensus::TaskAssignmentResponse>>(PrepareAsyncAssignTaskRaw(context, request, cq));
     }
+    ::grpc::Status GetLeader(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest& request, ::swiftconsensus::GetLeaderResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::swiftconsensus::GetLeaderResponse>> AsyncGetLeader(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::swiftconsensus::GetLeaderResponse>>(AsyncGetLeaderRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::swiftconsensus::GetLeaderResponse>> PrepareAsyncGetLeader(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::swiftconsensus::GetLeaderResponse>>(PrepareAsyncGetLeaderRaw(context, request, cq));
+    }
     class async final :
       public StubInterface::async_interface {
      public:
+      void SubmitTask(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest* request, ::swiftconsensus::SubmitTaskResponse* response, std::function<void(::grpc::Status)>) override;
+      void SubmitTask(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest* request, ::swiftconsensus::SubmitTaskResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
       void SendHeartbeat(::grpc::ClientContext* context, const ::swiftconsensus::HeartbeatRequest* request, ::swiftconsensus::HeartbeatResponse* response, std::function<void(::grpc::Status)>) override;
       void SendHeartbeat(::grpc::ClientContext* context, const ::swiftconsensus::HeartbeatRequest* request, ::swiftconsensus::HeartbeatResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
       void AssignTask(::grpc::ClientContext* context, const ::swiftconsensus::TaskAssignmentRequest* request, ::swiftconsensus::TaskAssignmentResponse* response, std::function<void(::grpc::Status)>) override;
       void AssignTask(::grpc::ClientContext* context, const ::swiftconsensus::TaskAssignmentRequest* request, ::swiftconsensus::TaskAssignmentResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void GetLeader(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest* request, ::swiftconsensus::GetLeaderResponse* response, std::function<void(::grpc::Status)>) override;
+      void GetLeader(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest* request, ::swiftconsensus::GetLeaderResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -103,12 +143,18 @@ class SwiftConsensusService final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
+    ::grpc::ClientAsyncResponseReader< ::swiftconsensus::SubmitTaskResponse>* AsyncSubmitTaskRaw(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::swiftconsensus::SubmitTaskResponse>* PrepareAsyncSubmitTaskRaw(::grpc::ClientContext* context, const ::swiftconsensus::SubmitTaskRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::swiftconsensus::HeartbeatResponse>* AsyncSendHeartbeatRaw(::grpc::ClientContext* context, const ::swiftconsensus::HeartbeatRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::swiftconsensus::HeartbeatResponse>* PrepareAsyncSendHeartbeatRaw(::grpc::ClientContext* context, const ::swiftconsensus::HeartbeatRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::swiftconsensus::TaskAssignmentResponse>* AsyncAssignTaskRaw(::grpc::ClientContext* context, const ::swiftconsensus::TaskAssignmentRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::swiftconsensus::TaskAssignmentResponse>* PrepareAsyncAssignTaskRaw(::grpc::ClientContext* context, const ::swiftconsensus::TaskAssignmentRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::swiftconsensus::GetLeaderResponse>* AsyncGetLeaderRaw(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::swiftconsensus::GetLeaderResponse>* PrepareAsyncGetLeaderRaw(::grpc::ClientContext* context, const ::swiftconsensus::GetLeaderRequest& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_SubmitTask_;
     const ::grpc::internal::RpcMethod rpcmethod_SendHeartbeat_;
     const ::grpc::internal::RpcMethod rpcmethod_AssignTask_;
+    const ::grpc::internal::RpcMethod rpcmethod_GetLeader_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -116,8 +162,30 @@ class SwiftConsensusService final {
    public:
     Service();
     virtual ~Service();
+    virtual ::grpc::Status SubmitTask(::grpc::ServerContext* context, const ::swiftconsensus::SubmitTaskRequest* request, ::swiftconsensus::SubmitTaskResponse* response);
     virtual ::grpc::Status SendHeartbeat(::grpc::ServerContext* context, const ::swiftconsensus::HeartbeatRequest* request, ::swiftconsensus::HeartbeatResponse* response);
     virtual ::grpc::Status AssignTask(::grpc::ServerContext* context, const ::swiftconsensus::TaskAssignmentRequest* request, ::swiftconsensus::TaskAssignmentResponse* response);
+    virtual ::grpc::Status GetLeader(::grpc::ServerContext* context, const ::swiftconsensus::GetLeaderRequest* request, ::swiftconsensus::GetLeaderResponse* response);
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_SubmitTask : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_SubmitTask() {
+      ::grpc::Service::MarkMethodAsync(0);
+    }
+    ~WithAsyncMethod_SubmitTask() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status SubmitTask(::grpc::ServerContext* /*context*/, const ::swiftconsensus::SubmitTaskRequest* /*request*/, ::swiftconsensus::SubmitTaskResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestSubmitTask(::grpc::ServerContext* context, ::swiftconsensus::SubmitTaskRequest* request, ::grpc::ServerAsyncResponseWriter< ::swiftconsensus::SubmitTaskResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
   };
   template <class BaseClass>
   class WithAsyncMethod_SendHeartbeat : public BaseClass {
@@ -125,7 +193,7 @@ class SwiftConsensusService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_SendHeartbeat() {
-      ::grpc::Service::MarkMethodAsync(0);
+      ::grpc::Service::MarkMethodAsync(1);
     }
     ~WithAsyncMethod_SendHeartbeat() override {
       BaseClassMustBeDerivedFromService(this);
@@ -136,7 +204,7 @@ class SwiftConsensusService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestSendHeartbeat(::grpc::ServerContext* context, ::swiftconsensus::HeartbeatRequest* request, ::grpc::ServerAsyncResponseWriter< ::swiftconsensus::HeartbeatResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -145,7 +213,7 @@ class SwiftConsensusService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_AssignTask() {
-      ::grpc::Service::MarkMethodAsync(1);
+      ::grpc::Service::MarkMethodAsync(2);
     }
     ~WithAsyncMethod_AssignTask() override {
       BaseClassMustBeDerivedFromService(this);
@@ -156,23 +224,70 @@ class SwiftConsensusService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAssignTask(::grpc::ServerContext* context, ::swiftconsensus::TaskAssignmentRequest* request, ::grpc::ServerAsyncResponseWriter< ::swiftconsensus::TaskAssignmentResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_SendHeartbeat<WithAsyncMethod_AssignTask<Service > > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_GetLeader : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_GetLeader() {
+      ::grpc::Service::MarkMethodAsync(3);
+    }
+    ~WithAsyncMethod_GetLeader() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetLeader(::grpc::ServerContext* /*context*/, const ::swiftconsensus::GetLeaderRequest* /*request*/, ::swiftconsensus::GetLeaderResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestGetLeader(::grpc::ServerContext* context, ::swiftconsensus::GetLeaderRequest* request, ::grpc::ServerAsyncResponseWriter< ::swiftconsensus::GetLeaderResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_SubmitTask<WithAsyncMethod_SendHeartbeat<WithAsyncMethod_AssignTask<WithAsyncMethod_GetLeader<Service > > > > AsyncService;
+  template <class BaseClass>
+  class WithCallbackMethod_SubmitTask : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_SubmitTask() {
+      ::grpc::Service::MarkMethodCallback(0,
+          new ::grpc::internal::CallbackUnaryHandler< ::swiftconsensus::SubmitTaskRequest, ::swiftconsensus::SubmitTaskResponse>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::swiftconsensus::SubmitTaskRequest* request, ::swiftconsensus::SubmitTaskResponse* response) { return this->SubmitTask(context, request, response); }));}
+    void SetMessageAllocatorFor_SubmitTask(
+        ::grpc::MessageAllocator< ::swiftconsensus::SubmitTaskRequest, ::swiftconsensus::SubmitTaskResponse>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::swiftconsensus::SubmitTaskRequest, ::swiftconsensus::SubmitTaskResponse>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_SubmitTask() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status SubmitTask(::grpc::ServerContext* /*context*/, const ::swiftconsensus::SubmitTaskRequest* /*request*/, ::swiftconsensus::SubmitTaskResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* SubmitTask(
+      ::grpc::CallbackServerContext* /*context*/, const ::swiftconsensus::SubmitTaskRequest* /*request*/, ::swiftconsensus::SubmitTaskResponse* /*response*/)  { return nullptr; }
+  };
   template <class BaseClass>
   class WithCallbackMethod_SendHeartbeat : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_SendHeartbeat() {
-      ::grpc::Service::MarkMethodCallback(0,
+      ::grpc::Service::MarkMethodCallback(1,
           new ::grpc::internal::CallbackUnaryHandler< ::swiftconsensus::HeartbeatRequest, ::swiftconsensus::HeartbeatResponse>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::swiftconsensus::HeartbeatRequest* request, ::swiftconsensus::HeartbeatResponse* response) { return this->SendHeartbeat(context, request, response); }));}
     void SetMessageAllocatorFor_SendHeartbeat(
         ::grpc::MessageAllocator< ::swiftconsensus::HeartbeatRequest, ::swiftconsensus::HeartbeatResponse>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::swiftconsensus::HeartbeatRequest, ::swiftconsensus::HeartbeatResponse>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -193,13 +308,13 @@ class SwiftConsensusService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_AssignTask() {
-      ::grpc::Service::MarkMethodCallback(1,
+      ::grpc::Service::MarkMethodCallback(2,
           new ::grpc::internal::CallbackUnaryHandler< ::swiftconsensus::TaskAssignmentRequest, ::swiftconsensus::TaskAssignmentResponse>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::swiftconsensus::TaskAssignmentRequest* request, ::swiftconsensus::TaskAssignmentResponse* response) { return this->AssignTask(context, request, response); }));}
     void SetMessageAllocatorFor_AssignTask(
         ::grpc::MessageAllocator< ::swiftconsensus::TaskAssignmentRequest, ::swiftconsensus::TaskAssignmentResponse>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::swiftconsensus::TaskAssignmentRequest, ::swiftconsensus::TaskAssignmentResponse>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -214,15 +329,59 @@ class SwiftConsensusService final {
     virtual ::grpc::ServerUnaryReactor* AssignTask(
       ::grpc::CallbackServerContext* /*context*/, const ::swiftconsensus::TaskAssignmentRequest* /*request*/, ::swiftconsensus::TaskAssignmentResponse* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_SendHeartbeat<WithCallbackMethod_AssignTask<Service > > CallbackService;
+  template <class BaseClass>
+  class WithCallbackMethod_GetLeader : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_GetLeader() {
+      ::grpc::Service::MarkMethodCallback(3,
+          new ::grpc::internal::CallbackUnaryHandler< ::swiftconsensus::GetLeaderRequest, ::swiftconsensus::GetLeaderResponse>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::swiftconsensus::GetLeaderRequest* request, ::swiftconsensus::GetLeaderResponse* response) { return this->GetLeader(context, request, response); }));}
+    void SetMessageAllocatorFor_GetLeader(
+        ::grpc::MessageAllocator< ::swiftconsensus::GetLeaderRequest, ::swiftconsensus::GetLeaderResponse>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(3);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::swiftconsensus::GetLeaderRequest, ::swiftconsensus::GetLeaderResponse>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_GetLeader() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetLeader(::grpc::ServerContext* /*context*/, const ::swiftconsensus::GetLeaderRequest* /*request*/, ::swiftconsensus::GetLeaderResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* GetLeader(
+      ::grpc::CallbackServerContext* /*context*/, const ::swiftconsensus::GetLeaderRequest* /*request*/, ::swiftconsensus::GetLeaderResponse* /*response*/)  { return nullptr; }
+  };
+  typedef WithCallbackMethod_SubmitTask<WithCallbackMethod_SendHeartbeat<WithCallbackMethod_AssignTask<WithCallbackMethod_GetLeader<Service > > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
+  template <class BaseClass>
+  class WithGenericMethod_SubmitTask : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_SubmitTask() {
+      ::grpc::Service::MarkMethodGeneric(0);
+    }
+    ~WithGenericMethod_SubmitTask() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status SubmitTask(::grpc::ServerContext* /*context*/, const ::swiftconsensus::SubmitTaskRequest* /*request*/, ::swiftconsensus::SubmitTaskResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
   template <class BaseClass>
   class WithGenericMethod_SendHeartbeat : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_SendHeartbeat() {
-      ::grpc::Service::MarkMethodGeneric(0);
+      ::grpc::Service::MarkMethodGeneric(1);
     }
     ~WithGenericMethod_SendHeartbeat() override {
       BaseClassMustBeDerivedFromService(this);
@@ -239,7 +398,7 @@ class SwiftConsensusService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_AssignTask() {
-      ::grpc::Service::MarkMethodGeneric(1);
+      ::grpc::Service::MarkMethodGeneric(2);
     }
     ~WithGenericMethod_AssignTask() override {
       BaseClassMustBeDerivedFromService(this);
@@ -251,12 +410,49 @@ class SwiftConsensusService final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_GetLeader : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_GetLeader() {
+      ::grpc::Service::MarkMethodGeneric(3);
+    }
+    ~WithGenericMethod_GetLeader() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetLeader(::grpc::ServerContext* /*context*/, const ::swiftconsensus::GetLeaderRequest* /*request*/, ::swiftconsensus::GetLeaderResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_SubmitTask : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_SubmitTask() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_SubmitTask() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status SubmitTask(::grpc::ServerContext* /*context*/, const ::swiftconsensus::SubmitTaskRequest* /*request*/, ::swiftconsensus::SubmitTaskResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestSubmitTask(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithRawMethod_SendHeartbeat : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_SendHeartbeat() {
-      ::grpc::Service::MarkMethodRaw(0);
+      ::grpc::Service::MarkMethodRaw(1);
     }
     ~WithRawMethod_SendHeartbeat() override {
       BaseClassMustBeDerivedFromService(this);
@@ -267,7 +463,7 @@ class SwiftConsensusService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestSendHeartbeat(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -276,7 +472,7 @@ class SwiftConsensusService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_AssignTask() {
-      ::grpc::Service::MarkMethodRaw(1);
+      ::grpc::Service::MarkMethodRaw(2);
     }
     ~WithRawMethod_AssignTask() override {
       BaseClassMustBeDerivedFromService(this);
@@ -287,8 +483,50 @@ class SwiftConsensusService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestAssignTask(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
+  };
+  template <class BaseClass>
+  class WithRawMethod_GetLeader : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_GetLeader() {
+      ::grpc::Service::MarkMethodRaw(3);
+    }
+    ~WithRawMethod_GetLeader() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetLeader(::grpc::ServerContext* /*context*/, const ::swiftconsensus::GetLeaderRequest* /*request*/, ::swiftconsensus::GetLeaderResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestGetLeader(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_SubmitTask : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_SubmitTask() {
+      ::grpc::Service::MarkMethodRawCallback(0,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->SubmitTask(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_SubmitTask() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status SubmitTask(::grpc::ServerContext* /*context*/, const ::swiftconsensus::SubmitTaskRequest* /*request*/, ::swiftconsensus::SubmitTaskResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* SubmitTask(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithRawCallbackMethod_SendHeartbeat : public BaseClass {
@@ -296,7 +534,7 @@ class SwiftConsensusService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_SendHeartbeat() {
-      ::grpc::Service::MarkMethodRawCallback(0,
+      ::grpc::Service::MarkMethodRawCallback(1,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->SendHeartbeat(context, request, response); }));
@@ -318,7 +556,7 @@ class SwiftConsensusService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_AssignTask() {
-      ::grpc::Service::MarkMethodRawCallback(1,
+      ::grpc::Service::MarkMethodRawCallback(2,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->AssignTask(context, request, response); }));
@@ -335,12 +573,61 @@ class SwiftConsensusService final {
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
+  class WithRawCallbackMethod_GetLeader : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_GetLeader() {
+      ::grpc::Service::MarkMethodRawCallback(3,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->GetLeader(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_GetLeader() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetLeader(::grpc::ServerContext* /*context*/, const ::swiftconsensus::GetLeaderRequest* /*request*/, ::swiftconsensus::GetLeaderResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* GetLeader(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_SubmitTask : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_SubmitTask() {
+      ::grpc::Service::MarkMethodStreamed(0,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::swiftconsensus::SubmitTaskRequest, ::swiftconsensus::SubmitTaskResponse>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::swiftconsensus::SubmitTaskRequest, ::swiftconsensus::SubmitTaskResponse>* streamer) {
+                       return this->StreamedSubmitTask(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_SubmitTask() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status SubmitTask(::grpc::ServerContext* /*context*/, const ::swiftconsensus::SubmitTaskRequest* /*request*/, ::swiftconsensus::SubmitTaskResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedSubmitTask(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::swiftconsensus::SubmitTaskRequest,::swiftconsensus::SubmitTaskResponse>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_SendHeartbeat : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_SendHeartbeat() {
-      ::grpc::Service::MarkMethodStreamed(0,
+      ::grpc::Service::MarkMethodStreamed(1,
         new ::grpc::internal::StreamedUnaryHandler<
           ::swiftconsensus::HeartbeatRequest, ::swiftconsensus::HeartbeatResponse>(
             [this](::grpc::ServerContext* context,
@@ -367,7 +654,7 @@ class SwiftConsensusService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_AssignTask() {
-      ::grpc::Service::MarkMethodStreamed(1,
+      ::grpc::Service::MarkMethodStreamed(2,
         new ::grpc::internal::StreamedUnaryHandler<
           ::swiftconsensus::TaskAssignmentRequest, ::swiftconsensus::TaskAssignmentResponse>(
             [this](::grpc::ServerContext* context,
@@ -388,9 +675,36 @@ class SwiftConsensusService final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedAssignTask(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::swiftconsensus::TaskAssignmentRequest,::swiftconsensus::TaskAssignmentResponse>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_SendHeartbeat<WithStreamedUnaryMethod_AssignTask<Service > > StreamedUnaryService;
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_GetLeader : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_GetLeader() {
+      ::grpc::Service::MarkMethodStreamed(3,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::swiftconsensus::GetLeaderRequest, ::swiftconsensus::GetLeaderResponse>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::swiftconsensus::GetLeaderRequest, ::swiftconsensus::GetLeaderResponse>* streamer) {
+                       return this->StreamedGetLeader(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_GetLeader() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status GetLeader(::grpc::ServerContext* /*context*/, const ::swiftconsensus::GetLeaderRequest* /*request*/, ::swiftconsensus::GetLeaderResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedGetLeader(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::swiftconsensus::GetLeaderRequest,::swiftconsensus::GetLeaderResponse>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_SubmitTask<WithStreamedUnaryMethod_SendHeartbeat<WithStreamedUnaryMethod_AssignTask<WithStreamedUnaryMethod_GetLeader<Service > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_SendHeartbeat<WithStreamedUnaryMethod_AssignTask<Service > > StreamedService;
+  typedef WithStreamedUnaryMethod_SubmitTask<WithStreamedUnaryMethod_SendHeartbeat<WithStreamedUnaryMethod_AssignTask<WithStreamedUnaryMethod_GetLeader<Service > > > > StreamedService;
 };
 
 }  // namespace swiftconsensus

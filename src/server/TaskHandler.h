@@ -6,21 +6,23 @@
 #include <string>
 #include "common/PeerTable.h"
 
-// Forward declaration (only needed for pointer types)
+// Forward declaration
 class SwiftConsensusClient;
 
 class TaskHandler {
 public:
-    TaskHandler(std::string selfId, PeerTable& peerTable, std::vector<std::shared_ptr<SwiftConsensusClient>>& clients)
-        : selfId_(selfId), peerTable_(peerTable), clients_(clients), taskCounter_(0) {}
+    TaskHandler(std::string selfId,
+                PeerTable& peerTable,
+                std::vector<std::shared_ptr<SwiftConsensusClient>>& clients)
+        : selfId_(std::move(selfId)), peerTable_(peerTable), clients_(clients) {}
 
-    void generateAndAssignTask();
+    // You can keep this for testing simulated tasks or remove it if not needed
+    void simulateAndAssignDummyTask();
 
 private:
     std::string selfId_;
     PeerTable& peerTable_;
     std::vector<std::shared_ptr<SwiftConsensusClient>>& clients_;
-    int taskCounter_;
 };
 
 #endif // TASK_HANDLER_H

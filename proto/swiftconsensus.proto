@@ -29,8 +29,25 @@ message TaskAssignmentResponse {
   string message = 1;
 }
 
+message SubmitTaskRequest {
+  string task_id = 1;
+  string task_data = 2;
+  int32 task_size = 3; // in bytes or MB
+}
+
+message SubmitTaskResponse {
+  string status = 1;
+}
+
+message GetLeaderRequest {}
+message GetLeaderResponse {
+  string leader_id = 1;
+}
+
 // Define gRPC Service
 service SwiftConsensusService {
+  rpc SubmitTask(SubmitTaskRequest) returns (SubmitTaskResponse);
   rpc SendHeartbeat(HeartbeatRequest) returns (HeartbeatResponse);
   rpc AssignTask(TaskAssignmentRequest) returns (TaskAssignmentResponse);
+  rpc GetLeader(GetLeaderRequest) returns (GetLeaderResponse);
 }

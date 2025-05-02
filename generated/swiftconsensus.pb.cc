@@ -86,6 +86,64 @@ struct TaskAssignmentRequestDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TaskAssignmentRequestDefaultTypeInternal _TaskAssignmentRequest_default_instance_;
 
+inline constexpr SubmitTaskResponse::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : status_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR SubmitTaskResponse::SubmitTaskResponse(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct SubmitTaskResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SubmitTaskResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SubmitTaskResponseDefaultTypeInternal() {}
+  union {
+    SubmitTaskResponse _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SubmitTaskResponseDefaultTypeInternal _SubmitTaskResponse_default_instance_;
+
+inline constexpr SubmitTaskRequest::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : task_id_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        task_data_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        task_size_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR SubmitTaskRequest::SubmitTaskRequest(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct SubmitTaskRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SubmitTaskRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SubmitTaskRequestDefaultTypeInternal() {}
+  union {
+    SubmitTaskRequest _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SubmitTaskRequestDefaultTypeInternal _SubmitTaskRequest_default_instance_;
+
 inline constexpr HeartbeatResponse::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : message_(
@@ -144,6 +202,51 @@ struct HeartbeatRequestDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 HeartbeatRequestDefaultTypeInternal _HeartbeatRequest_default_instance_;
+
+inline constexpr GetLeaderResponse::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : leader_id_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR GetLeaderResponse::GetLeaderResponse(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct GetLeaderResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR GetLeaderResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~GetLeaderResponseDefaultTypeInternal() {}
+  union {
+    GetLeaderResponse _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 GetLeaderResponseDefaultTypeInternal _GetLeaderResponse_default_instance_;
+              template <typename>
+PROTOBUF_CONSTEXPR GetLeaderRequest::GetLeaderRequest(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::internal::ZeroFieldsBase(_class_data_.base()){}
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::internal::ZeroFieldsBase() {
+}
+#endif  // PROTOBUF_CUSTOM_VTABLE
+struct GetLeaderRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR GetLeaderRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~GetLeaderRequestDefaultTypeInternal() {}
+  union {
+    GetLeaderRequest _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 GetLeaderRequestDefaultTypeInternal _GetLeaderRequest_default_instance_;
 }  // namespace swiftconsensus
 static constexpr const ::_pb::EnumDescriptor**
     file_level_enum_descriptors_swiftconsensus_2eproto = nullptr;
@@ -195,6 +298,43 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::swiftconsensus::TaskAssignmentResponse, _impl_.message_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::swiftconsensus::SubmitTaskRequest, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::swiftconsensus::SubmitTaskRequest, _impl_.task_id_),
+        PROTOBUF_FIELD_OFFSET(::swiftconsensus::SubmitTaskRequest, _impl_.task_data_),
+        PROTOBUF_FIELD_OFFSET(::swiftconsensus::SubmitTaskRequest, _impl_.task_size_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::swiftconsensus::SubmitTaskResponse, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::swiftconsensus::SubmitTaskResponse, _impl_.status_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::swiftconsensus::GetLeaderRequest, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::swiftconsensus::GetLeaderResponse, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::swiftconsensus::GetLeaderResponse, _impl_.leader_id_),
 };
 
 static const ::_pbi::MigrationSchema
@@ -203,12 +343,20 @@ static const ::_pbi::MigrationSchema
         {14, -1, -1, sizeof(::swiftconsensus::HeartbeatResponse)},
         {23, -1, -1, sizeof(::swiftconsensus::TaskAssignmentRequest)},
         {34, -1, -1, sizeof(::swiftconsensus::TaskAssignmentResponse)},
+        {43, -1, -1, sizeof(::swiftconsensus::SubmitTaskRequest)},
+        {54, -1, -1, sizeof(::swiftconsensus::SubmitTaskResponse)},
+        {63, -1, -1, sizeof(::swiftconsensus::GetLeaderRequest)},
+        {71, -1, -1, sizeof(::swiftconsensus::GetLeaderResponse)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::swiftconsensus::_HeartbeatRequest_default_instance_._instance,
     &::swiftconsensus::_HeartbeatResponse_default_instance_._instance,
     &::swiftconsensus::_TaskAssignmentRequest_default_instance_._instance,
     &::swiftconsensus::_TaskAssignmentResponse_default_instance_._instance,
+    &::swiftconsensus::_SubmitTaskRequest_default_instance_._instance,
+    &::swiftconsensus::_SubmitTaskResponse_default_instance_._instance,
+    &::swiftconsensus::_GetLeaderRequest_default_instance_._instance,
+    &::swiftconsensus::_GetLeaderResponse_default_instance_._instance,
 };
 const char descriptor_table_protodef_swiftconsensus_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
@@ -221,24 +369,33 @@ const char descriptor_table_protodef_swiftconsensus_2eproto[] ABSL_ATTRIBUTE_SEC
     "\001(\t\"P\n\025TaskAssignmentRequest\022\017\n\007task_id\030"
     "\001 \001(\t\022\023\n\013assigned_by\030\002 \001(\t\022\021\n\ttask_data\030"
     "\003 \001(\t\")\n\026TaskAssignmentResponse\022\017\n\007messa"
-    "ge\030\001 \001(\t2\312\001\n\025SwiftConsensusService\022T\n\rSe"
-    "ndHeartbeat\022 .swiftconsensus.HeartbeatRe"
-    "quest\032!.swiftconsensus.HeartbeatResponse"
-    "\022[\n\nAssignTask\022%.swiftconsensus.TaskAssi"
-    "gnmentRequest\032&.swiftconsensus.TaskAssig"
-    "nmentResponseb\006proto3"
+    "ge\030\001 \001(\t\"J\n\021SubmitTaskRequest\022\017\n\007task_id"
+    "\030\001 \001(\t\022\021\n\ttask_data\030\002 \001(\t\022\021\n\ttask_size\030\003"
+    " \001(\005\"$\n\022SubmitTaskResponse\022\016\n\006status\030\001 \001"
+    "(\t\"\022\n\020GetLeaderRequest\"&\n\021GetLeaderRespo"
+    "nse\022\021\n\tleader_id\030\001 \001(\t2\361\002\n\025SwiftConsensu"
+    "sService\022S\n\nSubmitTask\022!.swiftconsensus."
+    "SubmitTaskRequest\032\".swiftconsensus.Submi"
+    "tTaskResponse\022T\n\rSendHeartbeat\022 .swiftco"
+    "nsensus.HeartbeatRequest\032!.swiftconsensu"
+    "s.HeartbeatResponse\022[\n\nAssignTask\022%.swif"
+    "tconsensus.TaskAssignmentRequest\032&.swift"
+    "consensus.TaskAssignmentResponse\022P\n\tGetL"
+    "eader\022 .swiftconsensus.GetLeaderRequest\032"
+    "!.swiftconsensus.GetLeaderResponseb\006prot"
+    "o3"
 };
 static ::absl::once_flag descriptor_table_swiftconsensus_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_swiftconsensus_2eproto = {
     false,
     false,
-    581,
+    922,
     descriptor_table_protodef_swiftconsensus_2eproto,
     "swiftconsensus.proto",
     &descriptor_table_swiftconsensus_2eproto_once,
     nullptr,
     0,
-    4,
+    8,
     schemas,
     file_default_instances,
     TableStruct_swiftconsensus_2eproto::offsets,
@@ -1353,6 +1510,857 @@ void TaskAssignmentResponse::InternalSwap(TaskAssignmentResponse* PROTOBUF_RESTR
 }
 
 ::google::protobuf::Metadata TaskAssignmentResponse::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class SubmitTaskRequest::_Internal {
+ public:
+};
+
+SubmitTaskRequest::SubmitTaskRequest(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:swiftconsensus.SubmitTaskRequest)
+}
+inline PROTOBUF_NDEBUG_INLINE SubmitTaskRequest::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::swiftconsensus::SubmitTaskRequest& from_msg)
+      : task_id_(arena, from.task_id_),
+        task_data_(arena, from.task_data_),
+        _cached_size_{0} {}
+
+SubmitTaskRequest::SubmitTaskRequest(
+    ::google::protobuf::Arena* arena,
+    const SubmitTaskRequest& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SubmitTaskRequest* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  _impl_.task_size_ = from._impl_.task_size_;
+
+  // @@protoc_insertion_point(copy_constructor:swiftconsensus.SubmitTaskRequest)
+}
+inline PROTOBUF_NDEBUG_INLINE SubmitTaskRequest::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : task_id_(arena),
+        task_data_(arena),
+        _cached_size_{0} {}
+
+inline void SubmitTaskRequest::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.task_size_ = {};
+}
+SubmitTaskRequest::~SubmitTaskRequest() {
+  // @@protoc_insertion_point(destructor:swiftconsensus.SubmitTaskRequest)
+  SharedDtor(*this);
+}
+inline void SubmitTaskRequest::SharedDtor(MessageLite& self) {
+  SubmitTaskRequest& this_ = static_cast<SubmitTaskRequest&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.task_id_.Destroy();
+  this_._impl_.task_data_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* SubmitTaskRequest::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) SubmitTaskRequest(arena);
+}
+constexpr auto SubmitTaskRequest::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(SubmitTaskRequest),
+                                            alignof(SubmitTaskRequest));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull SubmitTaskRequest::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_SubmitTaskRequest_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &SubmitTaskRequest::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<SubmitTaskRequest>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &SubmitTaskRequest::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<SubmitTaskRequest>(), &SubmitTaskRequest::ByteSizeLong,
+            &SubmitTaskRequest::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(SubmitTaskRequest, _impl_._cached_size_),
+        false,
+    },
+    &SubmitTaskRequest::kDescriptorMethods,
+    &descriptor_table_swiftconsensus_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* SubmitTaskRequest::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 0, 57, 2> SubmitTaskRequest::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::swiftconsensus::SubmitTaskRequest>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // string task_id = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(SubmitTaskRequest, _impl_.task_id_)}},
+    // string task_data = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(SubmitTaskRequest, _impl_.task_data_)}},
+    // int32 task_size = 3;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SubmitTaskRequest, _impl_.task_size_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(SubmitTaskRequest, _impl_.task_size_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string task_id = 1;
+    {PROTOBUF_FIELD_OFFSET(SubmitTaskRequest, _impl_.task_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string task_data = 2;
+    {PROTOBUF_FIELD_OFFSET(SubmitTaskRequest, _impl_.task_data_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 task_size = 3;
+    {PROTOBUF_FIELD_OFFSET(SubmitTaskRequest, _impl_.task_size_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+    "\40\7\11\0\0\0\0\0"
+    "swiftconsensus.SubmitTaskRequest"
+    "task_id"
+    "task_data"
+  }},
+};
+
+PROTOBUF_NOINLINE void SubmitTaskRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:swiftconsensus.SubmitTaskRequest)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.task_id_.ClearToEmpty();
+  _impl_.task_data_.ClearToEmpty();
+  _impl_.task_size_ = 0;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* SubmitTaskRequest::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const SubmitTaskRequest& this_ = static_cast<const SubmitTaskRequest&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* SubmitTaskRequest::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const SubmitTaskRequest& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:swiftconsensus.SubmitTaskRequest)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string task_id = 1;
+          if (!this_._internal_task_id().empty()) {
+            const std::string& _s = this_._internal_task_id();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "swiftconsensus.SubmitTaskRequest.task_id");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          // string task_data = 2;
+          if (!this_._internal_task_data().empty()) {
+            const std::string& _s = this_._internal_task_data();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "swiftconsensus.SubmitTaskRequest.task_data");
+            target = stream->WriteStringMaybeAliased(2, _s, target);
+          }
+
+          // int32 task_size = 3;
+          if (this_._internal_task_size() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<3>(
+                    stream, this_._internal_task_size(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:swiftconsensus.SubmitTaskRequest)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t SubmitTaskRequest::ByteSizeLong(const MessageLite& base) {
+          const SubmitTaskRequest& this_ = static_cast<const SubmitTaskRequest&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t SubmitTaskRequest::ByteSizeLong() const {
+          const SubmitTaskRequest& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:swiftconsensus.SubmitTaskRequest)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // string task_id = 1;
+            if (!this_._internal_task_id().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_task_id());
+            }
+            // string task_data = 2;
+            if (!this_._internal_task_data().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_task_data());
+            }
+            // int32 task_size = 3;
+            if (this_._internal_task_size() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_task_size());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void SubmitTaskRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<SubmitTaskRequest*>(&to_msg);
+  auto& from = static_cast<const SubmitTaskRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:swiftconsensus.SubmitTaskRequest)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_task_id().empty()) {
+    _this->_internal_set_task_id(from._internal_task_id());
+  }
+  if (!from._internal_task_data().empty()) {
+    _this->_internal_set_task_data(from._internal_task_data());
+  }
+  if (from._internal_task_size() != 0) {
+    _this->_impl_.task_size_ = from._impl_.task_size_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void SubmitTaskRequest::CopyFrom(const SubmitTaskRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:swiftconsensus.SubmitTaskRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void SubmitTaskRequest::InternalSwap(SubmitTaskRequest* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.task_id_, &other->_impl_.task_id_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.task_data_, &other->_impl_.task_data_, arena);
+        swap(_impl_.task_size_, other->_impl_.task_size_);
+}
+
+::google::protobuf::Metadata SubmitTaskRequest::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class SubmitTaskResponse::_Internal {
+ public:
+};
+
+SubmitTaskResponse::SubmitTaskResponse(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:swiftconsensus.SubmitTaskResponse)
+}
+inline PROTOBUF_NDEBUG_INLINE SubmitTaskResponse::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::swiftconsensus::SubmitTaskResponse& from_msg)
+      : status_(arena, from.status_),
+        _cached_size_{0} {}
+
+SubmitTaskResponse::SubmitTaskResponse(
+    ::google::protobuf::Arena* arena,
+    const SubmitTaskResponse& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SubmitTaskResponse* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+
+  // @@protoc_insertion_point(copy_constructor:swiftconsensus.SubmitTaskResponse)
+}
+inline PROTOBUF_NDEBUG_INLINE SubmitTaskResponse::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : status_(arena),
+        _cached_size_{0} {}
+
+inline void SubmitTaskResponse::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+SubmitTaskResponse::~SubmitTaskResponse() {
+  // @@protoc_insertion_point(destructor:swiftconsensus.SubmitTaskResponse)
+  SharedDtor(*this);
+}
+inline void SubmitTaskResponse::SharedDtor(MessageLite& self) {
+  SubmitTaskResponse& this_ = static_cast<SubmitTaskResponse&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.status_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* SubmitTaskResponse::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) SubmitTaskResponse(arena);
+}
+constexpr auto SubmitTaskResponse::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(SubmitTaskResponse),
+                                            alignof(SubmitTaskResponse));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull SubmitTaskResponse::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_SubmitTaskResponse_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &SubmitTaskResponse::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<SubmitTaskResponse>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &SubmitTaskResponse::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<SubmitTaskResponse>(), &SubmitTaskResponse::ByteSizeLong,
+            &SubmitTaskResponse::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(SubmitTaskResponse, _impl_._cached_size_),
+        false,
+    },
+    &SubmitTaskResponse::kDescriptorMethods,
+    &descriptor_table_swiftconsensus_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* SubmitTaskResponse::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 48, 2> SubmitTaskResponse::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::swiftconsensus::SubmitTaskResponse>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // string status = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(SubmitTaskResponse, _impl_.status_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string status = 1;
+    {PROTOBUF_FIELD_OFFSET(SubmitTaskResponse, _impl_.status_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\41\6\0\0\0\0\0\0"
+    "swiftconsensus.SubmitTaskResponse"
+    "status"
+  }},
+};
+
+PROTOBUF_NOINLINE void SubmitTaskResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:swiftconsensus.SubmitTaskResponse)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.status_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* SubmitTaskResponse::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const SubmitTaskResponse& this_ = static_cast<const SubmitTaskResponse&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* SubmitTaskResponse::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const SubmitTaskResponse& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:swiftconsensus.SubmitTaskResponse)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string status = 1;
+          if (!this_._internal_status().empty()) {
+            const std::string& _s = this_._internal_status();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "swiftconsensus.SubmitTaskResponse.status");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:swiftconsensus.SubmitTaskResponse)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t SubmitTaskResponse::ByteSizeLong(const MessageLite& base) {
+          const SubmitTaskResponse& this_ = static_cast<const SubmitTaskResponse&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t SubmitTaskResponse::ByteSizeLong() const {
+          const SubmitTaskResponse& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:swiftconsensus.SubmitTaskResponse)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // string status = 1;
+            if (!this_._internal_status().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_status());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void SubmitTaskResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<SubmitTaskResponse*>(&to_msg);
+  auto& from = static_cast<const SubmitTaskResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:swiftconsensus.SubmitTaskResponse)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_status().empty()) {
+    _this->_internal_set_status(from._internal_status());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void SubmitTaskResponse::CopyFrom(const SubmitTaskResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:swiftconsensus.SubmitTaskResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void SubmitTaskResponse::InternalSwap(SubmitTaskResponse* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.status_, &other->_impl_.status_, arena);
+}
+
+::google::protobuf::Metadata SubmitTaskResponse::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class GetLeaderRequest::_Internal {
+ public:
+};
+
+GetLeaderRequest::GetLeaderRequest(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  // @@protoc_insertion_point(arena_constructor:swiftconsensus.GetLeaderRequest)
+}
+GetLeaderRequest::GetLeaderRequest(
+    ::google::protobuf::Arena* arena,
+    const GetLeaderRequest& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  GetLeaderRequest* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+
+  // @@protoc_insertion_point(copy_constructor:swiftconsensus.GetLeaderRequest)
+}
+
+inline void* GetLeaderRequest::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) GetLeaderRequest(arena);
+}
+constexpr auto GetLeaderRequest::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(GetLeaderRequest),
+                                            alignof(GetLeaderRequest));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull GetLeaderRequest::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_GetLeaderRequest_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &GetLeaderRequest::MergeImpl,
+        ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<GetLeaderRequest>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &GetLeaderRequest::SharedDtor,
+        ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<GetLeaderRequest>(), &GetLeaderRequest::ByteSizeLong,
+            &GetLeaderRequest::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(GetLeaderRequest, _impl_._cached_size_),
+        false,
+    },
+    &GetLeaderRequest::kDescriptorMethods,
+    &descriptor_table_swiftconsensus_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* GetLeaderRequest::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 0, 0, 0, 2> GetLeaderRequest::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    0, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967295,  // skipmap
+    offsetof(decltype(_table_), field_names),  // no field_entries
+    0,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::swiftconsensus::GetLeaderRequest>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }},
+  // no field_entries, or aux_entries
+  {{
+  }},
+};
+
+
+
+
+
+
+
+
+::google::protobuf::Metadata GetLeaderRequest::GetMetadata() const {
+  return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class GetLeaderResponse::_Internal {
+ public:
+};
+
+GetLeaderResponse::GetLeaderResponse(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:swiftconsensus.GetLeaderResponse)
+}
+inline PROTOBUF_NDEBUG_INLINE GetLeaderResponse::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::swiftconsensus::GetLeaderResponse& from_msg)
+      : leader_id_(arena, from.leader_id_),
+        _cached_size_{0} {}
+
+GetLeaderResponse::GetLeaderResponse(
+    ::google::protobuf::Arena* arena,
+    const GetLeaderResponse& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  GetLeaderResponse* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+
+  // @@protoc_insertion_point(copy_constructor:swiftconsensus.GetLeaderResponse)
+}
+inline PROTOBUF_NDEBUG_INLINE GetLeaderResponse::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : leader_id_(arena),
+        _cached_size_{0} {}
+
+inline void GetLeaderResponse::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+GetLeaderResponse::~GetLeaderResponse() {
+  // @@protoc_insertion_point(destructor:swiftconsensus.GetLeaderResponse)
+  SharedDtor(*this);
+}
+inline void GetLeaderResponse::SharedDtor(MessageLite& self) {
+  GetLeaderResponse& this_ = static_cast<GetLeaderResponse&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.leader_id_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* GetLeaderResponse::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) GetLeaderResponse(arena);
+}
+constexpr auto GetLeaderResponse::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(GetLeaderResponse),
+                                            alignof(GetLeaderResponse));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull GetLeaderResponse::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_GetLeaderResponse_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &GetLeaderResponse::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<GetLeaderResponse>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &GetLeaderResponse::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<GetLeaderResponse>(), &GetLeaderResponse::ByteSizeLong,
+            &GetLeaderResponse::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(GetLeaderResponse, _impl_._cached_size_),
+        false,
+    },
+    &GetLeaderResponse::kDescriptorMethods,
+    &descriptor_table_swiftconsensus_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* GetLeaderResponse::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 50, 2> GetLeaderResponse::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::swiftconsensus::GetLeaderResponse>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // string leader_id = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(GetLeaderResponse, _impl_.leader_id_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string leader_id = 1;
+    {PROTOBUF_FIELD_OFFSET(GetLeaderResponse, _impl_.leader_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\40\11\0\0\0\0\0\0"
+    "swiftconsensus.GetLeaderResponse"
+    "leader_id"
+  }},
+};
+
+PROTOBUF_NOINLINE void GetLeaderResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:swiftconsensus.GetLeaderResponse)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.leader_id_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* GetLeaderResponse::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const GetLeaderResponse& this_ = static_cast<const GetLeaderResponse&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* GetLeaderResponse::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const GetLeaderResponse& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:swiftconsensus.GetLeaderResponse)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string leader_id = 1;
+          if (!this_._internal_leader_id().empty()) {
+            const std::string& _s = this_._internal_leader_id();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "swiftconsensus.GetLeaderResponse.leader_id");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:swiftconsensus.GetLeaderResponse)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t GetLeaderResponse::ByteSizeLong(const MessageLite& base) {
+          const GetLeaderResponse& this_ = static_cast<const GetLeaderResponse&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t GetLeaderResponse::ByteSizeLong() const {
+          const GetLeaderResponse& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:swiftconsensus.GetLeaderResponse)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // string leader_id = 1;
+            if (!this_._internal_leader_id().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_leader_id());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void GetLeaderResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<GetLeaderResponse*>(&to_msg);
+  auto& from = static_cast<const GetLeaderResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:swiftconsensus.GetLeaderResponse)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_leader_id().empty()) {
+    _this->_internal_set_leader_id(from._internal_leader_id());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void GetLeaderResponse::CopyFrom(const GetLeaderResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:swiftconsensus.GetLeaderResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void GetLeaderResponse::InternalSwap(GetLeaderResponse* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.leader_id_, &other->_impl_.leader_id_, arena);
+}
+
+::google::protobuf::Metadata GetLeaderResponse::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

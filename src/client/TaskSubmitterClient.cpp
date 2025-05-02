@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    std::string initial_address = argv[1];   // e.g., "localhost:50052"
+    std::string initial_address = argv[1];
     std::string task_id = argv[2];
     std::string task_data = argv[3];
     int task_size = std::stoi(argv[4]);
@@ -79,7 +79,7 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    std::string leader_address = "localhost:" + leader_id.substr(7);  // e.g., "server_50053" → "localhost:50053"
+    std::string leader_address = "localhost:" + leader_id.substr(7);
     std::cout << "[Info] Submitting task to leader at " << leader_address << std::endl;
     client.SubmitTask(leader_address, task_id, task_data, task_size);
 

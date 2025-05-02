@@ -37,12 +37,12 @@ using swiftconsensus::GetLeaderRequest;
 using swiftconsensus::GetLeaderResponse;
 using swiftconsensus::SwiftConsensusService;
 
-// --- Global Variables ---
+
 std::string self_id;
 std::string self_address;
-std::atomic<int> current_queue_length{0};  // Real task queue counter
+std::atomic<int> current_queue_length{0};
 
-// --- gRPC Server Side Implementation ---
+
 class SwiftConsensusServiceImpl final : public SwiftConsensusService::Service {
 public:
     SwiftConsensusServiceImpl(PeerTable& peerTable,
@@ -72,9 +72,9 @@ public:
                   << " Assigned By: " << request->assigned_by()
                   << " | Task Data: " << request->task_data() << std::endl;
 
-        current_queue_length++;  // track real load
+        current_queue_length++;
 
-        std::this_thread::sleep_for(std::chrono::seconds(2));  // simulate work
+        std::this_thread::sleep_for(std::chrono::seconds(2));
 
         std::cout << "[Task Completed] TaskID: " << request->task_id() << std::endl;
         current_queue_length--;
@@ -145,7 +145,7 @@ private:
     std::vector<std::shared_ptr<SwiftConsensusClient>>& clients_;
 };
 
-// --- Function to Run gRPC Server ---
+
 void RunServer(std::string server_address,
                PeerTable& peerTable,
                LeaderElectionManager& electionManager,
@@ -162,7 +162,7 @@ void RunServer(std::string server_address,
     server->Wait();
 }
 
-// --- Main ---
+
 int main(int argc, char** argv) {
     if (argc != 2) {
         std::cerr << "Usage: SwiftConsensusServer <port>" << std::endl;

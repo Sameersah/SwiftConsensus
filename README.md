@@ -1,158 +1,130 @@
-# SwiftConsensus 
+# SwiftConsensus
 
-**SwiftConsensus** is a high-performance, decentralized, near-real-time **Leader Election and Task Distribution** system built using **C++**, **gRPC**, and **Protobuf**.
-
-Designed for reliability, modularity, and fairness, SwiftConsensus dynamically elects a leader among nodes based on live performance metrics, assigns tasks efficiently, and automatically recovers from node failures — all without any centralized controller.
+SwiftConsensus is a decentralized, score-based consensus leadership algorithm built using C++ and gRPC. It enables dynamic leader election, fair task assignment, failure recovery, and resource-aware load balancing — ideal for distributed scheduling systems.
 
 ---
 
-##  Table of Contents
-- [Architecture](#architecture)
-- [Design Highlights](#design-highlights)
-- [Folder Structure](#folder-structure)
-- [Build Instructions](#build-instructions)
-- [Run Instructions](#run-instructions)
-- [Sample Output](#sample-output)
-- [Future Extensions](#future-extensions)
+##  Features
+
+- ✅ Dynamic leader election (score-based)
+- ✅ Peer-to-peer decentralized architecture
+- ✅ Fair task assignment using CPU, memory, and queue length
+- ✅ Task delegation based on effective scores (with self-penalty for leader)
+- ✅ Failure detection & automatic re-election
+- ✅ Support for external client-submitted tasks
+- ✅ Real system metrics (CPU & memory) using system calls
+- ✅ Soft-state peer table with heartbeat recovery
+- ✅ Clean, modular architecture
 
 ---
 
-##  Architecture
-
-```
-+-------------------------------------------------------------+
-|                         SwiftConsensus Cluster              |
-|                                                             |
-|  +------------------+    +------------------+              |
-|  |    Node 1         |    |    Node 2         |              |
-|  | (SwiftConsensus)  |    | (SwiftConsensus)  |              |
-|  +------------------+    +------------------+              |
-|       ↑       ↓                   ↑       ↓                 |
-|       Heartbeats + Scores          Heartbeats + Scores       |
-|                                                             |
-|  +------------------+    +------------------+    +------------------+  |
-|  |    Node 3         |    |    Node 4         |    |    Node 5         |  |
-|  | (SwiftConsensus)  |    | (SwiftConsensus)  |    | (SwiftConsensus)  |  |
-|  +------------------+    +------------------+    +------------------+  |
-|                                                             |
-|   Leader Node:                                              |
-|   - Generates Tasks                                         |
-|   - Assigns to best available worker                       |
-|                                                             |
-|   Failures:                                                 |
-|   - Auto-detected and recovered                             |
-|   - New leader elected dynamically                         |
-+-------------------------------------------------------------+
-```
-
----
-
-##  Design Highlights
-
-- **gRPC + Protobuf** based communication.
-- **Dynamic Leader Election** based on live scores (CPU%, Memory%, Task Queue).
-- **Heartbeat-based Failure Detection** (5-second timeout).
-- **Fair Work Distribution** to healthiest nodes.
-- **Full Peer-to-Peer decentralized model** (no master server).
-- **Production-grade modular C++ architecture** (server/client/common layers).
-
----
-
-##  Folder Structure
+##  Project Structure
 
 ```
 SwiftConsensus/
 ├── CMakeLists.txt
-├── README.md
-├── proto/
-│   └── swiftconsensus.proto
-├── generated/
-│   └── (gRPC compiled code)
+├── proto/                      # Protobuf definitions
+├── generated/                  # gRPC generated .pb.cc/.h files
 ├── src/
-│   ├── server/
-│   │   ├── SwiftConsensusServer.cpp
-│   │   ├── LeaderElectionManager.h / .cpp
-│   │   ├── FailureDetector.h / .cpp
-│   │   └── TaskHandler.h / .cpp
-│   ├── client/
-│   │   ├── SwiftConsensusClient.h / .cpp
-│   ├── common/
-│   │   ├── PeerTable.h / .cpp
-│   │   └── Utils.h
-└── build/ (created after build)
+│   ├── server/                 # Server logic (leader, handler, failure)
+│   ├── client/                 # SwiftConsensusClient & TaskSubmitterClient
+│   └── common/                 # Peer table & utilities
+├── run_all.sh                 # Script to launch multiple nodes
+└── README.md
 ```
 
 ---
 
-##  Build Instructions
+## ⚙ Build Instructions
 
-1. Install **gRPC** and **Protobuf** libraries on your system.
+### Prerequisites
 
-2. Generate gRPC and Protobuf classes:
-   ```bash
-   protoc -I=proto/ --cpp_out=generated/ --grpc_out=generated/ --plugin=protoc-gen-grpc=`which grpc_cpp_plugin` proto/swiftconsensus.proto
-   ```
+- gRPC and Protocol Buffers
+- CMake >= 3.10
+- C++17 compiler
 
-3. Build using CMake:
-   ```bash
-   mkdir build
-   cd build
-   cmake ..
-   make
-   ```
-
- Executable `SwiftConsensusServer` will be created inside `build/`.
-
----
-
-## 🚀 Run Instructions
-
-Run **multiple instances** to simulate multiple nodes:
+### Build
 
 ```bash
+mkdir build
 cd build
-./SwiftConsensusServer 50051
-./SwiftConsensusServer 50052
-./SwiftConsensusServer 50053
-./SwiftConsensusServer 50054
-./SwiftConsensusServer 50055
-```
-
-Each node will:
-- Start a gRPC server to receive heartbeats and tasks.
-- Send heartbeats every 2 seconds.
-- Dynamically elect the leader.
-- Assign tasks if the node becomes the leader.
-
----
-
-##  Sample Output
-
-```
-[Server Started] Listening on localhost:50051
-[Heartbeat Received] server_50052 | Score: 78.2 | CPU: 80 | Memory: 70 | Queue: 2
-[Leader Update] New Leader: server_50051
-[Leader Action] Generating Task
-[Leader Assigns Task] task_1 to server_50052
-[Task Received] TaskID: task_1 Assigned By: server_50051 | Task Data: data_for_task_1
-[Task Completed] TaskID: task_1
-[Failure Detected] server_50053 is DEAD
-[Leader Update] New Leader: server_50054
+cmake ..
+make
 ```
 
 ---
 
-##  Future Extensions
+## ▶ Run the Cluster
 
-- ✅ Persistent storage for tasks and peer states.
-- ✅ Dynamic joining and leaving of new servers (auto discovery).
-- ✅ Prioritized task queues (urgent vs normal tasks).
-- ✅ Load balancing improvements using dynamic weights (cpu/io/network latency).
-- ✅ Visualization dashboard (real-time system view).
+Start 5 server nodes on ports 50051–50055:
+
+```bash
+./run_all.sh
+```
+
+This runs:
+- gRPC servers
+- Heartbeat exchanges every 5s
+- Leader election every 15s
+- Task assignment by the leader every cycle
 
 ---
 
-#  Contribute
+##  Submit External Task (Client → Leader)
 
-Feel free to open pull requests or issues to improve SwiftConsensus further!
+```bash
+./SubmitTaskClient <task_id> <task_data>
+```
+
+The client:
+1. Calls `GetLeader()` on any known node
+2. Submits task to leader
+3. Leader routes to the best scoring server
+
+---
+
+##  Testing Scenarios
+
+###  Leader Election
+- Leader chosen based on CPU/memory/queue score
+- Logged as:
+```
+[Leader Election] ✅ New leader elected: server_50052 with score: 82.1
+```
+
+###  Task Assignment
+- Leader assigns tasks via gRPC to optimal peer
+- Logs:
+```
+[Leader Routing Task] task_5 → server_50054 (effective score: 81.3)
+```
+
+###  Failure Recovery
+- Stop a leader process (`Ctrl+C`)
+- Auto re-election kicks in within 5–7 seconds
+
+###  Recovery
+- Restart dead node
+- Heartbeat accepted again, node re-enters election pool
+
+---
+
+##  Metrics Used in Scoring
+
+```
+score = 0.4 * CPU_free + 0.3 * Memory_free - 0.2 * QueueLength
+```
+
+Leader penalizes itself (`-10`) to avoid bias in delegation.
+
+---
+
+##  Limitations & Future Work
+
+- Real task execution is simulated (2s delay)
+- Currently static peer list — add dynamic peer discovery
+- Could extend to Kubernetes pods or Docker Swarm tasks
+
+
+
 

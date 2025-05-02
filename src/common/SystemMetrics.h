@@ -10,7 +10,6 @@
 inline double getCPUUsage() {
     double load[1];
     if (getloadavg(load, 1) != -1) {
-        // Estimate CPU free percentage. Assumes load of 1.0 = full usage on 1-core system.
         int num_cores = sysconf(_SC_NPROCESSORS_ONLN);
         double usage_percent = std::min(100.0, (load[0] / num_cores) * 100.0);
         return std::max(0.0, 100.0 - usage_percent);

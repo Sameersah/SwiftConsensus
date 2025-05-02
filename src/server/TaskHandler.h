@@ -6,7 +6,7 @@
 #include <string>
 #include "common/PeerTable.h"
 
-// Forward declaration
+
 class SwiftConsensusClient;
 
 class TaskHandler {
@@ -16,7 +16,7 @@ public:
                 std::vector<std::shared_ptr<SwiftConsensusClient>>& clients)
         : selfId_(std::move(selfId)), peerTable_(peerTable), clients_(clients) {}
 
-    // You can keep this for testing simulated tasks or remove it if not needed
+
     void simulateAndAssignDummyTask();
 
 private:
